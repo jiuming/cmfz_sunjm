@@ -16,7 +16,7 @@ import java.util.Map;
 
 /**
  * @author 孙九明
- * 手机App接口
+ * 手机App接口（手机app数据访问）
  */
 @RestController
 public class InterfaceAction {
