@@ -14,6 +14,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author 孙九明
+ * 手机App接口
+ */
 @RestController
 public class InterfaceAction {
 
