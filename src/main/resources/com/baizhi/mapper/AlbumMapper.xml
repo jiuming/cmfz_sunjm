@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.AlbumDao">
+
+    <sql id="querySql">id,title,cover,author,score,broadcast,content,crea_date</sql>
+
+    <select id="selectAll" resultType="Album">
+        SELECT a.*, count(c.album_id) AS count
+        FROM album a LEFT JOIN chapter c ON a.id=c.album_id
+        GROUP BY a.id limit #{start},#{rows}
+    </select>
+
+    <select id="selectOne" resultType="Album">
+        select a.*, count(c.album_id) AS count
+        FROM album a LEFT JOIN chapter c ON a.id=c.album_id
+        where a.id =#{id}
+    </select>
+
+    <select id="countAll" resultType="Integer">
+        select count(id) from album
+    </select>
+
+    <insert id="addOne" parameterType="Album">
+        insert into album(<include refid="querySql"></include>) values(#{id},#{title},#{cover},#{author},#{score},#{broadcast},#{content},#{crea_date})
+    </insert>
+
+    <update id="updateOne" parameterType="Album">
+        update album
+        <set>
+            <if test="title!=null">
+                title=#{title},
+            </if>
+            <if test="cover!=null">
+                cover=#{cover},
+            </if>
+            <if test="author!=null">
+                author=#{author},
+            </if>
+            <if test="score!=null">
+                score=#{score},
+            </if>
+            <if test="broadcast!=null">
+                broadcast=#{broadcast},
+            </if>
+            <if test="content!=null">
+                content=#{content},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteOne">
+        delete from album where id = #{id}
+    </delete>
+</mapper>

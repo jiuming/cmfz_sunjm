@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.UserDao">
+
+    <sql id="querySql">id,avatar,phone,name,law_name,sex,status,city,sign,crea_date,guru_id</sql>
+
+    <select id="selectAll" resultType="User">
+        select <include refid="querySql"></include> from user
+        <if test="rows!=0">
+           limit #{start},#{rows}
+        </if>
+    </select>
+
+    <select id="selectOneByPhone" resultType="User">
+        select <include refid="querySql"></include> from user where phone=#{phone}
+    </select>
+
+    <select id="countAll" resultType="Integer">
+        select count(id) from user
+    </select>
+
+    <select id="selectMonthCountBySex" resultType="String">
+        SELECT count(u.id)
+        FROM month m LEFT JOIN (SELECT * FROM user WHERE sex=#{sex}) u on m.name=MONTH(u.crea_date)
+        GROUP BY m.name
+    </select>
+
+    <select id="selectCityCountBySex" resultType="com.baizhi.dto.City">
+        SELECT city as name,count(id) as value
+        FROM user
+        WHERE sex = #{sex}
+        GROUP BY city
+    </select>
+
+    <insert id="addOne" parameterType="User">
+        insert into user(id,avatar,phone,name,status,crea_date) values(#{id},#{avatar},#{phone},#{name},#{status},#{crea_date})
+    </insert>
+
+    <update id="updateOne" parameterType="User">
+        update user
+        <set>
+            <if test="avatar!=null">
+                avatar=#{avatar},
+            </if>
+            <if test="phone!=null">
+                phone=#{phone},
+            </if>
+            <if test="name!=null">
+                name=#{name},
+            </if>
+            <if test="status!=0">
+                status=#{status},
+            </if>
+            <if test="crea_date!=null">
+                crea_date=#{crea_date},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteOne">
+        delete from user where id = #{id}
+    </delete>
+</mapper>
