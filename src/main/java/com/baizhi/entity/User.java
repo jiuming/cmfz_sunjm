@@ -3,9 +3,10 @@ package com.baizhi.entity;
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
+public class User implements Serializable {
     private String id;
     @Excel(name = "头像",type = 2,width = 100 ,height =100)
     private String avatar;

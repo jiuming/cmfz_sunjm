@@ -1,6 +1,8 @@
 package com.baizhi.entity;
 
-public class Admin {
+import java.io.Serializable;
+
+public class Admin implements Serializable {
     private String id;
     private String username;
     private String password;

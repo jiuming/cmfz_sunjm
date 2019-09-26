@@ -3,6 +3,7 @@ package com.baizhi.service.impl;
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
 import com.alibaba.fastjson.JSON;
+import com.baizhi.cache.AddCache;
 import com.baizhi.dao.UserDao;
 import com.baizhi.entity.User;
 import com.baizhi.service.UserService;
@@ -37,12 +38,14 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
+    @AddCache
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<User> getAll(int page,int rows) {
         return userDao.selectAll(page*rows-rows,rows);
     }
 
+    @AddCache
     @Override
     public int getCount() {
         return userDao.countAll();

@@ -1,5 +1,6 @@
 package com.baizhi.service.impl;
 
+import com.baizhi.cache.AddCache;
 import com.baizhi.dao.AlbumDao;
 import com.baizhi.entity.Album;
 import com.baizhi.service.AlbumService;
@@ -20,12 +21,14 @@ public class AlbumServiceImpl implements AlbumService {
     @Autowired
     private AlbumDao albumDao;
 
+    @AddCache
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Album> getAll(int page,int rows) {
         return albumDao.selectAll(page*rows-rows,rows);
     }
 
+    @AddCache
     @Override
     public int getCount() {
         return albumDao.countAll();
@@ -54,6 +57,7 @@ public class AlbumServiceImpl implements AlbumService {
         return album.getCover();
     }
 
+    @AddCache
     @Override
     public Album getOne(String id) {
         return albumDao.selectOne(id);

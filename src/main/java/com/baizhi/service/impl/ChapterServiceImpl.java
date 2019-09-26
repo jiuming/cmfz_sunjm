@@ -1,5 +1,6 @@
 package com.baizhi.service.impl;
 
+import com.baizhi.cache.AddCache;
 import com.baizhi.dao.ChapterDao;
 import com.baizhi.entity.Chapter;
 import com.baizhi.service.ChapterService;
@@ -21,12 +22,14 @@ public class ChapterServiceImpl implements ChapterService {
     @Autowired
     private ChapterDao chapterDao;
 
+    @AddCache
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Chapter> getAll(String albumId,int page,int rows) {
         return chapterDao.selectAllByAlbum(albumId,page*rows-rows,rows);
     }
 
+    @AddCache
     @Override
     public int getCount(String albumId) {
         return chapterDao.countAllByAlbum(albumId);

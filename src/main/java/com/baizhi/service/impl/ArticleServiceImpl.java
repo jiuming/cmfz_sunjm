@@ -1,5 +1,6 @@
 package com.baizhi.service.impl;
 
+import com.baizhi.cache.AddCache;
 import com.baizhi.dao.ArticleDao;
 import com.baizhi.entity.Article;
 import com.baizhi.service.ArticleService;
@@ -20,17 +21,20 @@ public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleDao articleDao;
 
+    @AddCache
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Article> getAll(int page,int rows) {
         return articleDao.selectAll(page*rows-rows,rows);
     }
 
+    @AddCache
     @Override
     public List<Article> getAllByGuru(String guru_id) {
         return articleDao.selectAllByGuru(guru_id);
     }
 
+    @AddCache
     @Override
     public int getCount() {
         return articleDao.countAll();

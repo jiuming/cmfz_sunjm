@@ -2,9 +2,10 @@ package com.baizhi.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Article {
+public class Article implements Serializable {
 
     private String id;
     private String title;

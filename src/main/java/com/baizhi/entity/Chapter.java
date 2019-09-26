@@ -1,8 +1,9 @@
 package com.baizhi.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Chapter {
+public class Chapter implements Serializable {
     private String id;
     private String name;
     private String url;

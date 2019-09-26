@@ -1,5 +1,6 @@
 package com.baizhi.service.impl;
 
+import com.baizhi.cache.AddCache;
 import com.baizhi.dao.BannerDao;
 import com.baizhi.entity.Banner;
 import com.baizhi.service.BannerService;
@@ -19,12 +20,14 @@ public class BannerServiceImpl implements BannerService {
     @Autowired
     private BannerDao bannerDao;
 
+    @AddCache
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Banner> getAll(int page,int rows) {
         return bannerDao.selectAll(page*rows-rows,rows);
     }
 
+    @AddCache
     @Override
     public int getCount() {
         return bannerDao.countAll();
