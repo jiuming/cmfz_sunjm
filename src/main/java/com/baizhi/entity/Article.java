@@ -1,18 +1,28 @@
 package com.baizhi.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
 import java.util.Date;
-
+@Document(indexName = "cmfz",type = "article")   //索引名   索引类型
 public class Article implements Serializable {
 
+    @Id
     private String id;
+    @Field(type = FieldType.Text,analyzer = "ik_max_word",searchAnalyzer = "ik_max_word")
     private String title;
+    @Field(type = FieldType.Keyword)
     private String author;
+    @Field(type = FieldType.Text,analyzer = "ik_max_word",searchAnalyzer = "ik_max_word")
     private String content;
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @Field(type = FieldType.Date)
     private Date crea_date;
+    @Field(type = FieldType.Keyword)
     private String guru_id;
 
     public String getId() {
@@ -73,5 +83,17 @@ public class Article implements Serializable {
                 ", crea_date=" + crea_date +
                 ", guru_id='" + guru_id + '\'' +
                 '}';
+    }
+
+    public Article() {
+    }
+
+    public Article(String id, String title, String author, String content, Date crea_date, String guru_id) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.content = content;
+        this.crea_date = crea_date;
+        this.guru_id = guru_id;
     }
 }

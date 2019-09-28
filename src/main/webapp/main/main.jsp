@@ -114,6 +114,9 @@
                     <div class="panel-group" align="center">
                         <a href="javascript:$('#mainid').load('${path}/article/article.jsp')" class="btn btn-warning" role="button">文章信息</a>
                     </div>
+                    <div class="panel-group" align="center">
+                        <a href="javascript:$('#mainid').load('${path}/article/articleSearch.jsp')" class="btn btn-warning" role="button">文章搜索</a>
+                    </div>
                 </div>
             </div>
             <br>

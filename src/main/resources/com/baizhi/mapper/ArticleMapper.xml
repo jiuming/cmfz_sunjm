@@ -29,7 +29,7 @@
             <if test="author!=null">
                 author=#{author},
             </if>
-            <if test="content!=null">
+            <if test="content!=null||content!=''">
                 content=#{content},
             </if>
             <if test="crea_date!=null">

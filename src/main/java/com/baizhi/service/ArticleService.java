@@ -17,4 +17,6 @@ public interface ArticleService {
     public void updateArticle(Article article);
 
     public void deleteArticle(String id);
+
+    public List<Article> getSearch(String word);
 }

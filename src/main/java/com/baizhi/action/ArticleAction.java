@@ -51,4 +51,10 @@ public class ArticleAction {
         articleService.deleteArticle(id);
         return new HashMap();
     }
+
+    @RequestMapping("/search")
+    public List<Article> search(String word) {
+        List<Article> articles = articleService.getSearch(word);
+        return articles;
+    }
 }
